@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flashcards</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="flashcards-app">
+    <div>
+        <h2>New card:</h2>
+        <input v-model="form.question" type="text" placeholder="question" />
+        <input v-model="form.answer" type="text" placeholder="answer" />
+        <input type="radio" id="history" value="history" v-model="form.category" />
+        <label for="history">History</label>
+        <input type="radio" id="math" value="math" v-model="form.category" />
+        <label for="math">Math</label>
+        <input type="radio" id="science" value="science" v-model="form.category" />
+        <label for="science">Science</label>
+        <button v-on:click="submit">Submit</button>
+    </div>
+
+    <div class="card" v-for="(card,key) in cards" v-on:click="flip(key)" v-bind:id="key">
+        <div class="top" v-bind:class="card.category"></div>
+        <div class="side1" v-bind:class="{hide:card.flipped}">
+            <h1>{{card.question}}</h1>
+        </div>
+        <div class="side2" v-bind:class="{hide:!card.flipped}">
+            <h1>{{card.answer}}</h1>
+        </div>
+    </div>
+</div>
+
+<script src="vue.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
